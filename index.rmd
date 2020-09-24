@@ -1,5 +1,5 @@
 ---
-title: "Untitled"
+title: "Graph examples"
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns
@@ -7,6 +7,9 @@ output:
 ---
 
 ```{r setup, include=FALSE}
+# https://dinov-tokyo.github.io/flexdashboard_ex/
+# https://ramikrispin.github.io/2020/09/deploying-flexdashboard-on-github-pages/
+# https://plotly.com/r/
 library(flexdashboard)
 ```
 
@@ -16,7 +19,18 @@ Column {data-width=650}
 ### Chart A
 
 ```{r}
+library(plotly)
 
+Animals <- c("giraffes", "orangutans", "monkeys")
+SF_Zoo <- c(20, 14, 23)
+LA_Zoo <- c(12, 18, 29)
+data <- data.frame(Animals, SF_Zoo, LA_Zoo)
+
+fig <- plot_ly(data, x = ~Animals, y = ~SF_Zoo, type = 'bar', name = 'SF Zoo')
+fig <- fig %>% add_trace(y = ~LA_Zoo, name = 'LA Zoo')
+fig <- fig %>% layout(yaxis = list(title = 'Count'), barmode = 'group')
+
+fig
 ```
 
 Column {data-width=350}
