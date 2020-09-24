@@ -1,0 +1,49 @@
+---
+title: "Untitled"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r}
+
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+library(plotly)
+library(tidyr)
+library(plyr)
+
+data <- spread(Orange, Tree, circumference)
+data <- rename(data, c("1" = "Tree1", "2" = "Tree2", "3" = "Tree3", "4" = "Tree4", "5" = "Tree5"))
+
+fig <- plot_ly(data, x = ~age, y = ~Tree1, type = 'scatter', mode = 'lines', name = 'Tree 1')
+fig <- fig %>% add_trace(y = ~Tree2, name = 'Tree 2')
+fig <- fig %>% add_trace(y = ~Tree3, name = 'Tree 3')
+fig <- fig %>% add_trace(y = ~Tree4, name = 'Tree 4')
+fig <- fig %>% add_trace(y = ~Tree5, name = 'Tree 5')
+
+fig
+```
+
+### Chart C
+
+```{r}
+
+```
+
